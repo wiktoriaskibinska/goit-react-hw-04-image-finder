@@ -57,6 +57,7 @@ export const App = () => {
     if (startFetch) {
       fetchImages();
     }
+    // eslint-disable-next-line
   }, [query, currentPage, setStartFetch]);
 
   const onSubmit = evt => {
@@ -95,6 +96,7 @@ export const App = () => {
       ) : (
         <p
           style={{
+            height: `100vh`,
             padding: 100,
             textAlign: 'center',
             fontSize: 30,
