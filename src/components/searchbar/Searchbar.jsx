@@ -7,11 +7,9 @@ const Searchbar = ({ onSubmit }) => {
     <div className={css.Searchbar}>
       <form className={css.SearchForm} onSubmit={onSubmit}>
         <button type="submit">
-          <span class="button-label">Search</span>
+          <span>Search</span>
         </button>
-
         <input
-          class="input"
           type="text"
           autoComplete="off"
           autoFocus
