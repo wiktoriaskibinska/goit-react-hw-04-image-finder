@@ -5,6 +5,15 @@ import Searchbar from './searchbar/Searchbar.jsx';
 import Button from './button/Button';
 import Loader from './loader/Loader';
 import Modal from './modal/Modal';
+import Notiflix, { Notify } from 'notiflix';
+
+Notify.init({
+  width: '300px',
+
+  success: {
+    background: 'pink',
+  },
+});
 
 const API_KEY = '41240894-272bca1f2c3dcb1548b81eb12';
 
@@ -18,7 +27,6 @@ export const App = () => {
   const [selectedImage, setSelectedImg] = useState('');
   const [show, setModal] = useState(false);
   const [startFetch, setStartFetch] = useState(false);
-  const [total, setTotal] = useState();
 
   const fetchImages = async () => {
     try {
@@ -30,12 +38,17 @@ export const App = () => {
       );
       const images = response.data.hits;
       const totalHits = response.data.totalHits;
-      setTotal(totalHits);
 
       setImages(prevImages => [...prevImages, ...images]);
       setTotalPages(Math.ceil(totalHits / PER_PAGE));
+
+      if (totalHits.length === 0) {
+        Notiflix.Notify.info(`0 images found`);
+      } else {
+        Notiflix.Notify.success(`${totalHits} images found!`);
+      }
     } catch (error) {
-      console.log(error);
+      Notiflix.Notify.failure(`Error occured, please try again!`);
     } finally {
       setLoading(false);
     }
